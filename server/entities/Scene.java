@@ -5,6 +5,9 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import server.exceptions.NbMaxConcertsAtteint;
+
+
 @Entity
 @Table(name="scene")
 public class Scene implements Serializable{
@@ -44,5 +47,12 @@ public class Scene implements Serializable{
 
   public int getNbconcerts(){
     return this.nbconcerts;
+  }
+
+  public void ajouterConcertScene(int nb_max_concerts) throws NbMaxConcertsAtteint{
+    this.nbconcerts++;
+    if(this.nbconcerts > nb_max_concerts){
+      throw new NbMaxConcertsAtteint();
+    }
   }
 }
